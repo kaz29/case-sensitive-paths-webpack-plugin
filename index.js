@@ -77,7 +77,7 @@ CaseSensitivePathsPlugin.prototype.fileExistsWithCaseSync = function (filepath) 
     }
 
     // If exact match exists, recurse through directory tree until root.
-    var recurse =  this.fileExistsWithCaseSync(dir);
+    var recurse = this.fileExistsWithCaseSync(dir);
 
     // If found an error elsewhere, return that correct filename
     // Don't bother caching - we're about to error out anyway.
@@ -106,12 +106,17 @@ CaseSensitivePathsPlugin.prototype.apply = function(compiler) {
             // Trim ? off, since some loaders add that to the resource they're attemping to load
             var pathName = data.resource.split('?')[0];
             pathName =  pathName.normalize ? pathName.normalize('NFC') : pathName;
-            var realName = _this.fileExistsWithCaseSync(pathName);
 
-            if (realName) {
-                done(new Error('[CaseSensitivePathsPlugin] `' + pathName + '` does not match the corresponding path on disk ' + realName));
-            } else {
-                done(null, data);
+            try {
+                var realName = _this.fileExistsWithCaseSync(pathName);
+
+                if (realName) {
+                    done(new Error('[CaseSensitivePathsPlugin] `' + pathName + '` does not match the corresponding path on disk ' + realName));
+                } else {
+                    done(null, data);
+                }
+            } catch (error) {
+                done(error);
             }
         });
     });
