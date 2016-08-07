@@ -42,7 +42,14 @@ CaseSensitivePathsPlugin.prototype.getFilenamesInDir = function (dir) {
         if (this.options.debug) {
             console.log('[CaseSensitivePathsPlugin] Reading directory', dir);
         }
-        return fs.readdirSync(dir).map(function(f) { return f.normalize ? f.normalize('NFC') : f; });
+        try {
+            return fs.readdirSync(dir).map(function(f) { return f.normalize ? f.normalize('NFC') : f; });
+        } catch (err) {
+            if (this.options.debug) {
+                console.log('[CaseSensitivePathsPlugin] Failed to read directory', dir, err);
+            }
+            return [];
+        }
     }
 };
 
@@ -107,16 +114,12 @@ CaseSensitivePathsPlugin.prototype.apply = function(compiler) {
             var pathName = data.resource.split('?')[0];
             pathName =  pathName.normalize ? pathName.normalize('NFC') : pathName;
 
-            try {
-                var realName = _this.fileExistsWithCaseSync(pathName);
+            var realName = _this.fileExistsWithCaseSync(pathName);
 
-                if (realName) {
-                    done(new Error('[CaseSensitivePathsPlugin] `' + pathName + '` does not match the corresponding path on disk ' + realName));
-                } else {
-                    done(null, data);
-                }
-            } catch (error) {
-                done(error);
+            if (realName) {
+                done(new Error('[CaseSensitivePathsPlugin] `' + pathName + '` does not match the corresponding path on disk ' + realName));
+            } else {
+                done(null, data);
             }
         });
     });
