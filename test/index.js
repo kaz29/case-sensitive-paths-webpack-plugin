@@ -69,7 +69,7 @@ describe("CaseSensitivePathsPlugin", function() {
                 setTimeout(function() {
                     // after initial compile delete test folder
                     exec("rm -r " + testFolder, function(err) { if (err) done(err); });
-                }, 200);
+                }, 100);
                 return;
             }
 
