@@ -42,7 +42,14 @@ CaseSensitivePathsPlugin.prototype.getFilenamesInDir = function (dir) {
         if (this.options.debug) {
             console.log('[CaseSensitivePathsPlugin] Reading directory', dir);
         }
-        return fs.readdirSync(dir).map(function(f) { return f.normalize ? f.normalize('NFC') : f; });
+        try {
+            return fs.readdirSync(dir).map(function(f) { return f.normalize ? f.normalize('NFC') : f; });
+        } catch (err) {
+            if (this.options.debug) {
+                console.log('[CaseSensitivePathsPlugin] Failed to read directory', dir, err);
+            }
+            return [];
+        }
     }
 };
 
@@ -77,7 +84,7 @@ CaseSensitivePathsPlugin.prototype.fileExistsWithCaseSync = function (filepath) 
     }
 
     // If exact match exists, recurse through directory tree until root.
-    var recurse =  this.fileExistsWithCaseSync(dir);
+    var recurse = this.fileExistsWithCaseSync(dir);
 
     // If found an error elsewhere, return that correct filename
     // Don't bother caching - we're about to error out anyway.
@@ -106,6 +113,7 @@ CaseSensitivePathsPlugin.prototype.apply = function(compiler) {
             // Trim ? off, since some loaders add that to the resource they're attemping to load
             var pathName = data.resource.split('?')[0];
             pathName =  pathName.normalize ? pathName.normalize('NFC') : pathName;
+
             var realName = _this.fileExistsWithCaseSync(pathName);
 
             if (realName) {
