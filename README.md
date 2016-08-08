@@ -47,3 +47,4 @@ Thanks & Credit
 * [Cameron Brewer](https://github.com/morethanfire) and [Ben Collins](https://github.com/aggieben) who added Windows support.
 * [Christian Lilley](https://github.com/xml) who added a demo/test package.
 * [Lance Eastgate](https://github.com/NorwegianKiwi) who added some internationalization support
+* [Jonathan Kim](https://github.com/jkimbo) and [Dan Abramov](https://github.com/gaearon) who investigated, fixed, and added some tests for a crashing bug.
