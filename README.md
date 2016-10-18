@@ -19,19 +19,23 @@ Install
 Usage
 ----
 
-    var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+```JavaScript
+var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
-    var webpackConfig = {
-        plugins: [
-            new CaseSensitivePathsPlugin()
-            // other plugins ...
-        ]
-        // other webpack config ...
-    }
+var webpackConfig = {
+    plugins: [
+        new CaseSensitivePathsPlugin()
+        // other plugins ...
+    ]
+    // other webpack config ...
+}
+```
 
 Want more information? Pass ```{debug: true}``` to the plugin like so:
 
-    new CaseSensitivePathsPlugin({debug: true})
+```JavaScript
+new CaseSensitivePathsPlugin({debug: true})
+```
 
 It will output every directory it reads, as well as a sum total of filesystem operations.
 This is mostly useful for internal debugging of the plugin, but if you find it useful, more power to you.
