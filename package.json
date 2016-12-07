@@ -17,6 +17,7 @@
     "import",
     "require"
   ],
+  "files": ["index.js"],
   "author": "Michael Pratt",
   "license": "MIT",
   "bugs": {
