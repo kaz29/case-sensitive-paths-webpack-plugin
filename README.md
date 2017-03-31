@@ -52,3 +52,4 @@ Thanks & Credit
 * [Christian Lilley](https://github.com/xml) who added a demo/test package.
 * [Lance Eastgate](https://github.com/NorwegianKiwi) who added some internationalization support
 * [Jonathan Kim](https://github.com/jkimbo) and [Dan Abramov](https://github.com/gaearon) who investigated, fixed, and added some tests for a crashing bug.
+* [Jason Quense](https://github.com/jquense) who switched it to properly use the webpack-provided fs object.
