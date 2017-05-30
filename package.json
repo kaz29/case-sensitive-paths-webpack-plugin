@@ -1,6 +1,6 @@
 {
   "name": "case-sensitive-paths-webpack-plugin",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Enforces module path case sensitivity in Webpack",
   "engines": { "node": ">4.0" },
   "main": "index.js",

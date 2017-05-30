@@ -1,3 +1,5 @@
+"use strict";
+
 let assert = require("assert");
 let fs = require("fs-extra");
 let path = require("path");
@@ -6,7 +8,7 @@ let webpack = require("webpack");
 
 let CaseSensitivePathsPlugin = require("../");
 
-function webpackCompilerAtDir(dir, otherOpts = {}) {
+function webpackCompilerAtDir(dir, otherOpts) {
     let opts = Object.assign({
         context: path.join(__dirname, "fixtures", dir),
         entry: "./entry",

@@ -1,3 +1,4 @@
+"use strict";
 /* This plugin based on https://gist.github.com/Morhaus/333579c2a5b4db644bd5
 
  Original license:
