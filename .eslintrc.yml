@@ -1,0 +1,8 @@
+extends: airbnb-base
+plugins:
+  - import
+rules:
+    no-console: off
+    func-names: off
+    max-len: off
+    no-confusing-arrow: off
