@@ -84,6 +84,7 @@ CaseSensitivePathsPlugin.prototype.fileExistsWithCase = function (filepath, call
     _this.getFilenamesInDir(dir, function (filenames) {
           // If the exact match does not exist, attempt to find the correct filename.
         if (filenames.indexOf(filename) === - 1) {
+          if (!fs.existsSync(filepath)) {
             // Fallback value, just in case.
             var correctFilename = '- File does not exist.';
 
@@ -94,6 +95,7 @@ CaseSensitivePathsPlugin.prototype.fileExistsWithCase = function (filepath, call
                 }
             }
             return callback(correctFilename);
+          }
         }
 
         // If exact match exists, recurse through directory tree until root.
